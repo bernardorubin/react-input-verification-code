@@ -148,9 +148,13 @@ const ReactInputVerificationCode = ({
 
       const pastedString = e.clipboardData?.getData('text');
       if (!pastedString) return;
-
-      const isNumber = !Number.isNaN(+pastedString);
-      if (isNumber) setValue(pastedString.split('').slice(0, length));
+      
+      if(allowText) {
+        setValue(pastedString.split('').slice(0, length))
+      } else {
+        const isNumber = !Number.isNaN(+pastedString);
+        if (isNumber) setValue(pastedString.split('').slice(0, length));
+      }
     };
 
     codeInput.addEventListener('paste', onPaste);

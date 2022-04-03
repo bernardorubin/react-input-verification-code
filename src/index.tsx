@@ -19,6 +19,7 @@ type Props = {
   dataCy?: string;
   type?: 'text' | 'password';
   passwordMask?: string;
+  allowText?: boolean;
 };
 
 const ReactInputVerificationCode = ({
@@ -31,6 +32,7 @@ const ReactInputVerificationCode = ({
   dataCy = 'verification-code',
   type = 'text',
   passwordMask = '•',
+  allowText = false
 }: Props) => {
   const emptyValue = new Array(length).fill(placeholder);
 
@@ -88,7 +90,9 @@ const ReactInputVerificationCode = ({
 
     // if the key pressed is not a number
     // don't do anything
-    if (Number.isNaN(+key)) return;
+    if (!allowText){
+      if (Number.isNaN(+key)) return;
+    }
 
     // reset the current value
     // and set the new one
